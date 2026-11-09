@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Марафон «Опора» — Психолог</title>
+<style>
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body { 
+        background-color: #f7f9f8; 
+        color: #1a1a1a; 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+        line-height: 1.5; 
+        overflow-x: hidden; 
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    a { text-decoration: none; color: inherit; }
+    
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .grid { display: grid; }
+    
+    .text-muted { color: #666; }
+
+    nav { 
+        position: fixed; top: 0; width: 100%; z-index: 50; 
+        background: rgba(247, 249, 248, 0.9); 
+        backdrop-filter: blur(10px); 
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+    .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-links { display: none; gap: 30px; font-weight: 500; font-size: 14px; color: #555; }
+    .nav-links a { transition: color 0.3s; cursor: pointer; }
+    .nav-links a:hover { color: #000; }
+    
+    .btn { 
+        display: inline-flex; align-items: center; justify-content: center;
+        padding: 14px 28px; border-radius: 8px; font-weight: 600; 
+        transition: all 0.2s ease; cursor: pointer; border: none; font-size: 15px; 
+    }
+    .btn-primary { background: #1a1a1a; color: #fff; }
+    .btn-primary:hover { background: #333; transform: translateY(-1px); }
+    .btn-outline { border: 1px solid #ccc; color: #1a1a1a; background: transparent; }
+    .btn-outline:hover { border-color: #1a1a1a; }
+
+    .hero { padding: 140px 0 80px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+    .hero h1 { font-size: 44px; line-height: 1.1; font-weight: 700; margin-bottom: 20px; letter-spacing: -1px; }
+    .hero p { font-size: 18px; color: #555; margin-bottom: 32px; max-width: 500px; }
+    
+    .hero-img-wrap { 
+        position: relative; border-radius: 16px; overflow: hidden; 
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+        aspect-ratio: 3/4;
+    }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .section { padding: 80px 0; }
+    .section-title { font-size: 32px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px; }
+    
+    .feature-card { 
+        background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; 
+        padding: 32px; transition: box-shadow 0.3s;
+    }
+    .feature-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .feature-card h3 { font-size: 20px; margin-bottom: 8px; }
+    .feature-card p { color: #666; font-size: 15px; }
+
+    .contact-box { 
+        background: #fff; border: 1px solid #e5e5e5; border-radius: 16px; 
+        padding: 40px; max-width: 500px; margin: 0 auto; 
+    }
+    .form-input { 
+        width: 100%; padding: 14px 16px; border-radius: 8px; 
+        border: 1px solid #e0e0e0; background: #fafafa; color: #1a1a1a; 
+        margin-bottom: 16px; outline: none; font-size: 15px; transition: 0.2s; 
+    }
+    .form-input:focus { border-color: #1a1a1a; background: #fff; }
+
+    .modal-overlay { 
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; 
+        backdrop-filter: blur(4px); 
+    }
+    .modal-box { background: #fff; padding: 40px; border-radius: 16px; max-width: 400px; text-align: center; }
+    .modal-box h3 { font-size: 24px; margin-bottom: 12px; }
+    .modal-box p { color: #666; margin-bottom: 24px; }
+
+    @media (min-width: 768px) {
+        .nav-links { display: flex; }
+        .hero-grid { grid-template-columns: 1.2fr 1fr; }
+        .hero h1 { font-size: 56px; }
+        .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="container nav-inner">
+        <div class="logo">Пространство</div>
+        <div class="nav-links">
+            <a href="#about" class="nav-scroll">О марафоне</a>
+            <a href="#program" class="nav-scroll">Программа</a>
+            <a href="#contact" class="nav-scroll">Записаться</a>
+        </div>
+        <a href="#contact" class="btn btn-primary nav-scroll" style="padding: 10px 20px; font-size: 14px;">Участвовать</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container hero-grid">
+        <div>
+            <h1>Верни себе<br>ясность и опору.</h1>
+            <p>21-дневный марафон для тех, кто устал от тревоги и хочет снова начать жить свою жизнь. Психология без воды и эзотерики.</p>
+            <div class="flex" style="gap: 12px; flex-wrap: wrap;">
+                <a href="#contact" class="btn btn-primary nav-scroll">Записаться на марафон</a>
+                <a href="#program" class="btn btn-outline nav-scroll">Узнать программу</a>
+            </div>
+        </div>
+        <div class="hero-img-wrap">
+            <img src="https://i.wfolio.ru/x/D48ScH1DA6jxU_uSH-Or-C0cJClpP-QP/lEAL128xEMPGM2o_rKw_kMPHKR9vAJ80/c1ahHEFmlwl4pthZKmYGnNwdfhgxqD4g/TKnuV5j6ARIo8XqHN8p835SiKxI065cT.jpg" alt="Психолог" class="hero-img">
+        </div>
+    </div>
+</section>
+
+<section id="about" class="section" style="background: #fff;">
+    <div class="container">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <h2 class="section-title">Как проходит марафон</h2>
+            <p class="text-muted" style="font-size: 18px; margin-top: 16px;">
+                Каждую неделю мы разбираем одну ключевую тему. Вы получаете короткие лекции, практики и задания, которые занимают не больше 20 минут в день.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="program" class="section">
+    <div class="container">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Что мы проработаем</h2>
+        
+        <div class="grid features-grid" style="gap: 24px;">
+            <div class="feature-card">
+                <h3>Тревога и фон</h3>
+                <p>Как успокоить тело и перестать накручивать себя на пустом месте.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Личные границы</h3>
+                <p>Как экологично говорить «нет» и не чувствовать при этом вину.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Энергия и ресурс</h3>
+                <p>Почему вы устаете даже от отдыха и как вернуть силы.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Свои желания</h3>
+                <p>Учимся отличать «надо» от «хочу» и слышать себя.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section" style="background: #fff;">
+    <div class="container">
+        <div class="contact-box">
+            <h2 class="section-title" style="font-size: 28px; text-align: center; margin-bottom: 8px;">Записаться на марафон</h2>
+            <p class="text-muted" style="text-align: center; margin-bottom: 24px; font-size: 15px;">Оставьте заявку, я свяжусь с вами лично и пришлю доступ.</p>
+            
+            <form id="leadForm">
+                <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>
+                <input type="tel" name="phone" class="form-input" placeholder="Номер телефона" required>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 16px; margin-top: 8px;">Записаться</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+        <h3>Заявка принята!</h3>
+        <p>Спасибо! Я свяжусь с вами в ближайшее время. А пока вы можете перейти к оплате и забронировать место со скидкой.</p>
+        <a href="#" class="btn btn-primary" style="width: 100%;">Перейти к оплате</a>
+    </div>
+</div>
+
+<footer style="padding: 40px 0; text-align: center; color: #888; font-size: 14px; border-top: 1px solid #e5e5e5;">
+    <div class="container">
+        <p>© 2026. Все права защищены.</p>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('.nav-scroll').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const headerHeight = 70;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    document.getElementById('leadForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button');
+        btn.innerText = 'Отправка...';
+        
+        setTimeout(() => {
+            btn.innerText = 'Записаться';
+            document.getElementById('successModal').style.display = 'flex';
+            this.reset();
+        }, 800);
+    });
+
+    document.getElementById('successModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
